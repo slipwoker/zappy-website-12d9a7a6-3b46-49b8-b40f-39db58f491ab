@@ -1,0 +1,828 @@
+<!DOCTYPE html><html lang="he" dir="rtl" data-zappy-site-type="ecommerce"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>נכסים - אריה נכסים - תל אביב</title>
+  <meta name="description" content="נכסים - אריה נכסים - תל אביב provides professional נדל" ן="" services.="" specializing="" in="" מתווך="" נדל="" ן."="">
+  <meta name="keywords" content="מתווך נדל ן, מתווך נדל" ן,="" מתווך="" דירות="" בתל="" אביב,="" להשקעה="" תל="" אביב="" למשקיעים="" זרים"="">
+  <meta name="robots" content="index, follow">
+  
+  <meta property="og:title" content="נכסים - אריה נכסים - תל אביב">
+  <meta property="og:description" content="נכסים - אריה נכסים - תל אביב provides professional נדל" ן="" services.="" specializing="" in="" מתווך="" נדל="" ן."="">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="he_IL">
+  
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="נכסים - אריה נכסים - תל אביב">
+  <meta name="twitter:description" content="נכסים - אריה נכסים - תל אביב provides professional נדל" ן="" services.="" specializing="" in="" מתווך="" נדל="" ן."="">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Favicons -->
+    <link rel="icon" type="image/x-icon" href="/assets/favicon.ico">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="48x48" href="/assets/favicon-48x48.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/assets/favicon-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="/assets/favicon-512x512.png">
+    <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+    <!-- Cookie Consent -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vanilla-cookieconsent@3/dist/cookieconsent.css">
+    <script src="https://cdn.jsdelivr.net/npm/vanilla-cookieconsent@3/dist/cookieconsent.umd.js"></script>
+    <!-- Mickidum Accessibility Toolbar -->
+    <script src="https://cdn.jsdelivr.net/gh/mickidum/acc_toolbar/acctoolbar/acctoolbar.min.js"></script>
+<!-- Zappy Analytics -->
+<script>
+(function() {
+  'use strict';
+  
+  // Configuration
+  var config = {
+    websiteId: '12d9a7a6-3b46-49b8-b40f-39db58f491ab',
+    apiUrl: 'https://api.zappy5.com/api/analytics/track',
+    sessionDuration: 30 * 60 * 1000, // 30 minutes
+    visitorDuration: 30 * 24 * 60 * 60 * 1000, // 30 days
+    trackPageViews: true,
+    trackClicks: true,
+    trackFormSubmissions: true
+  };
+  
+  // Generate or retrieve persistent visitor ID (30 days)
+  function getVisitorId() {
+    var visitorKey = 'zappy_visitor_' + config.websiteId;
+    var visitor = null;
+    
+    try {
+      visitor = localStorage.getItem(visitorKey);
+      if (visitor) {
+        var visitorData = JSON.parse(visitor);
+        var now = Date.now();
+        
+        // Check if visitor ID is still valid (30 days)
+        if (now - visitorData.created < config.visitorDuration) {
+          // Update last seen timestamp
+          visitorData.lastSeen = now;
+          localStorage.setItem(visitorKey, JSON.stringify(visitorData));
+          return visitorData.id;
+        }
+      }
+    } catch (e) {
+      console.warn('Zappy Analytics: LocalStorage not available');
+    }
+    
+    // Generate new visitor ID
+    var newVisitorId = 'zv_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+    
+    try {
+      localStorage.setItem(visitorKey, JSON.stringify({
+        id: newVisitorId,
+        created: Date.now(),
+        lastSeen: Date.now()
+      }));
+    } catch (e) {
+      // Continue without local storage
+    }
+    
+    return newVisitorId;
+  }
+  
+  // Generate or retrieve session ID (30 minutes)
+  function getSessionId() {
+    var sessionKey = 'zappy_session_' + config.websiteId;
+    var session = null;
+    
+    try {
+      session = sessionStorage.getItem(sessionKey);
+      if (session) {
+        var sessionData = JSON.parse(session);
+        var now = Date.now();
+        
+        // Check if session is still valid
+        if (now - sessionData.timestamp < config.sessionDuration) {
+          // Update timestamp
+          sessionData.timestamp = now;
+          sessionStorage.setItem(sessionKey, JSON.stringify(sessionData));
+          return sessionData.id;
+        }
+      }
+    } catch (e) {
+      console.warn('Zappy Analytics: SessionStorage not available');
+    }
+    
+    // Generate new session ID
+    var newSessionId = 'zs_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+    
+    try {
+      sessionStorage.setItem(sessionKey, JSON.stringify({
+        id: newSessionId,
+        timestamp: Date.now()
+      }));
+    } catch (e) {
+      // Continue without session storage
+    }
+    
+    return newSessionId;
+  }
+  
+  var visitorId = getVisitorId();
+  var sessionId = getSessionId();
+  
+  // Track an event
+  function trackEvent(eventType, data) {
+    data = data || {};
+    
+    var eventData = {
+      website_id: config.websiteId,
+      event_type: eventType,
+      page_path: window.location.pathname,
+      referrer: document.referrer || 'direct',
+      visitor_id: visitorId,
+      session_id: sessionId,
+      metadata: data
+    };
+    
+    // Use sendBeacon if available (better for page unload events)
+    if (navigator.sendBeacon) {
+      var blob = new Blob([JSON.stringify(eventData)], { type: 'application/json' });
+      navigator.sendBeacon(config.apiUrl, blob);
+    } else {
+      // Fallback to fetch
+      fetch(config.apiUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(eventData),
+        keepalive: true
+      }).catch(function(error) {
+        console.warn('Zappy Analytics: Failed to track event', error);
+      });
+    }
+  }
+  
+  // Track page view
+  if (config.trackPageViews) {
+    trackEvent('pageview', {
+      title: document.title,
+      url: window.location.href
+    });
+  }
+  
+  // Track clicks on important elements
+  if (config.trackClicks) {
+    document.addEventListener('click', function(e) {
+      var target = e.target;
+      
+      // Track button clicks (counted as actions)
+      if (target.tagName === 'BUTTON' || target.closest('button')) {
+        var button = target.tagName === 'BUTTON' ? target : target.closest('button');
+        trackEvent('click', {
+          element: 'button',
+          text: button.textContent.trim().substring(0, 100),
+          id: button.id || null,
+          class: button.className || null
+        });
+      }
+      
+      // Track link clicks (navigation - not counted as actions)
+      else if (target.tagName === 'A' || target.closest('a')) {
+        var link = target.tagName === 'A' ? target : target.closest('a');
+        trackEvent('navigation', {
+          element: 'link',
+          text: link.textContent.trim().substring(0, 100),
+          href: link.href,
+          external: link.hostname !== window.location.hostname
+        });
+      }
+    }, true);
+  }
+  
+  // Track form submissions
+  if (config.trackFormSubmissions) {
+    document.addEventListener('submit', function(e) {
+      var form = e.target;
+      
+      trackEvent('form_submit', {
+        form_id: form.id || null,
+        form_name: form.name || null,
+        form_action: form.action || null,
+        form_method: form.method || 'GET'
+      });
+    }, true);
+  }
+  
+  // Track time on page (send on page unload)
+  var pageLoadTime = Date.now();
+  
+  window.addEventListener('beforeunload', function() {
+    var timeOnPage = Math.floor((Date.now() - pageLoadTime) / 1000); // in seconds
+    
+    trackEvent('page_unload', {
+      time_on_page: timeOnPage,
+      page_path: window.location.pathname
+    });
+  });
+  
+  // Expose tracking function globally for custom events
+  window.zappyAnalytics = {
+    track: trackEvent,
+    getVisitorId: function() { return visitorId; },
+    getSessionId: function() { return sessionId; }
+  };
+  
+})();
+</script>
+<!-- End Zappy Analytics -->
+
+    <style id="zappy-dropdown-submenu-styles">
+      /* ========== DESKTOP DROPDOWN SUBMENU STYLES ========== */
+      /* Base styles for dropdown submenus - parent must be positioned */
+      .nav-menu li:has(.sub-menu), nav li:has(.sub-menu), .navbar li:has(.sub-menu), #navMenu li:has(.sub-menu) { position: relative; }
+      /* Submenu base - hidden by default */
+      .nav-menu .sub-menu, nav .sub-menu, .navbar .sub-menu, #navMenu .sub-menu { display: block !important; position: absolute !important; top: 100%; left: 0; min-width: 220px; background: white; border-radius: 8px; box-shadow: 0 8px 25px rgba(0,0,0,0.15); padding: 8px 0; opacity: 0; visibility: hidden; transform: translateY(10px); transition: all 0.3s ease; z-index: 1000; list-style: none; pointer-events: none; }
+      /* CRITICAL: Desktop hover styles to show dropdown */
+      .nav-menu li:hover > .sub-menu, nav li:hover > .sub-menu, .navbar li:hover > .sub-menu, #navMenu li:hover > .sub-menu { opacity: 1 !important; visibility: visible !important; transform: translateY(0) !important; pointer-events: auto !important; }
+      /* Submenu item styling */
+      .sub-menu li { list-style: none; margin: 0; padding: 0; }
+      .sub-menu a { display: block !important; padding: 10px 16px !important; color: #333 !important; font-weight: 500; text-decoration: none; white-space: nowrap; transition: background-color 0.2s; }
+      .sub-menu a:hover { background-color: #f5f5f5; }
+      /* RTL (Hebrew/Arabic) dropdown positioning */
+      [dir="rtl"] .nav-menu .sub-menu, [dir="rtl"] nav .sub-menu, [dir="rtl"] .navbar .sub-menu, html[lang="he"] .nav-menu .sub-menu, html[lang="he"] nav .sub-menu, html[lang="he"] .navbar .sub-menu, html[lang="ar"] .nav-menu .sub-menu, html[lang="ar"] nav .sub-menu, html[lang="ar"] .navbar .sub-menu { left: auto !important; right: 0 !important; }
+      /* Hide empty dropdown menus */
+      .sub-menu:empty, .sub-menu:not(:has(li:not(.zappy-hidden-menu-item))), .sub-menu:not(:has(li)) { display: none !important; opacity: 0 !important; visibility: hidden !important; pointer-events: none !important; }
+      /* Desktop: show submenu on Menu Group hover */
+      li:has(.menu-group-title):hover > .sub-menu { opacity: 1 !important; visibility: visible !important; transform: translateY(0) !important; pointer-events: auto !important; }
+      /* Menu Group title styling */
+      .nav-menu > li > .menu-group-title, #navMenu > li > .menu-group-title { display: inline-block; padding: 0.5rem 1rem; cursor: default; user-select: none; }
+      
+      /* ========== MOBILE SUBMENU STYLES ========== */
+      @media (max-width: 768px) {
+        .nav-menu .sub-menu, nav .sub-menu, .navbar .sub-menu, #navMenu .sub-menu { position: static !important; transform: none !important; box-shadow: none !important; background: transparent !important; max-height: 0; overflow: hidden; opacity: 0; visibility: hidden; transition: max-height 0.3s ease, opacity 0.3s ease; padding: 0 !important; border-radius: 0 !important; }
+        .sub-menu.mobile-expanded { max-height: 500px !important; opacity: 1 !important; visibility: visible !important; padding: 8px 0 8px 16px !important; }
+        [dir="rtl"] .sub-menu.mobile-expanded, html[lang="he"] .sub-menu.mobile-expanded { padding: 8px 16px 8px 0 !important; }
+        /* Disable hover behavior on mobile */
+        .nav-menu li:hover > .sub-menu, nav li:hover > .sub-menu, .navbar li:hover > .sub-menu, #navMenu li:hover > .sub-menu { opacity: 0; visibility: hidden; pointer-events: none; }
+        .nav-menu li > .sub-menu.mobile-expanded, nav li > .sub-menu.mobile-expanded, .navbar li > .sub-menu.mobile-expanded, #navMenu li > .sub-menu.mobile-expanded { opacity: 1 !important; visibility: visible !important; pointer-events: auto !important; }
+        .nav-menu li:has(.sub-menu), nav li:has(.sub-menu), .navbar li:has(.sub-menu), #navMenu li:has(.sub-menu) { display: flex !important; flex-wrap: wrap !important; align-items: center !important; }
+        .nav-menu li:has(.sub-menu) > a, nav li:has(.sub-menu) > a, .navbar li:has(.sub-menu) > a, #navMenu li:has(.sub-menu) > a { flex: 1 !important; }
+        .nav-menu li:has(.sub-menu) > a [class*="chevron"], .nav-menu li:has(.sub-menu) > a [class*="arrow"], .nav-menu li:has(.sub-menu) > a .fa-chevron-down, .nav-menu li:has(.sub-menu) > a .fa-angle-down, nav li:has(.sub-menu) > a [class*="chevron"], nav li:has(.sub-menu) > a [class*="arrow"], #navMenu li:has(.sub-menu) > a [class*="chevron"], #navMenu li:has(.sub-menu) > a [class*="arrow"] { display: none !important; visibility: hidden !important; }
+        .mobile-submenu-toggle { display: flex !important; align-items: center !important; justify-content: center !important; width: 44px !important; height: 44px !important; background: transparent !important; border: none !important; cursor: pointer !important; }
+        .mobile-submenu-toggle::after { content: '' !important; width: 0 !important; height: 0 !important; border-left: 6px solid transparent !important; border-right: 6px solid transparent !important; border-top: 7px solid currentColor !important; transition: transform 0.3s ease !important; }
+        .mobile-submenu-toggle.expanded::after { transform: rotate(180deg) !important; }
+        .nav-menu li:has(.sub-menu) > .sub-menu, nav li:has(.sub-menu) > .sub-menu { flex-basis: 100% !important; width: 100% !important; }
+        .sub-menu a { padding: 10px 0 !important; display: block !important; }
+        .nav-menu li:has(.sub-menu) > .menu-group-title, nav li:has(.sub-menu) > .menu-group-title, .navbar li:has(.sub-menu) > .menu-group-title, #navMenu li:has(.sub-menu) > .menu-group-title { flex: 1 !important; }
+      }
+      @media (min-width: 769px) { .mobile-submenu-toggle { display: none !important; } }
+    </style>
+</head>
+<body>
+
+    <div class="mobile-search-panel" id="mobile-search-panel">
+      <div class="search-wrapper">
+        <input type="text" id="mobile-search-input" placeholder="חיפוש מוצרים..." autocomplete="off">
+        <button class="search-submit" id="mobile-search-submit" title="חיפוש">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><path d="M21 21l-4.35-4.35"></path></svg>
+        </button>
+        <button class="close-search" id="close-mobile-search">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"></path></svg>
+        </button>
+      </div>
+      <div class="search-results" id="mobile-search-results"></div>
+    </div>
+  
+<script>window.ZAPPY_WEBSITE_ID = "12d9a7a6-3b46-49b8-b40f-39db58f491ab";window.ZAPPY_API_BASE = (window.location.pathname.includes('/preview') ? "https://api.zappy5.com" : "https://api.zappy5.com");</script>
+  <nav class="navbar" dir="rtl">
+  <button class="mobile-toggle" id="mobileToggle" aria-label="Menu">
+    <svg class="hamburger-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
+      <path d="M3 12h18M3 6h18M3 18h18" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
+    </svg>
+    <svg class="close-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" style="display:none;">
+      <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" stroke-width="2" stroke-linecap="round"></path>
+    </svg>
+  </button>
+  
+  <button class="phone-header-btn" aria-label="Call">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+    </svg>
+  </button>
+  
+  <div class="nav-container">
+    <div class="nav-brand">
+      <a href="/" class="logo-link">
+        <img class="logo" data-placeholder="logo" data-context="business logo" width="160" height="40" src="/assets/business-logo.webp" alt="אריה נכסים - תל אביב">
+      </a>
+    </div>
+    
+    <ul class="nav-menu" id="navMenu">
+
+    <li class="menu-item-has-children zappy-products-dropdown">
+      <a href="/products">
+        מוצרים
+        <svg class="dropdown-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M6 9l6 6 6-6"></path>
+        </svg>
+      </a>
+      <ul class="sub-menu" id="zappy-nav-category-links">
+        <li><a href="/products">כל המוצרים</a></li>
+        <!-- Categories will be loaded dynamically -->
+      </ul>
+    </li>
+  <li><a href="/properties">נכסים</a></li><li><a href="/about">אודות</a></li><li><a href="/contact">צור קשר</a></li></ul><div class="nav-ecommerce-icons nav-icons-left"><div class="nav-search-box">
+    <input type="text" class="nav-search-input" id="nav-search-input" placeholder="חיפוש מוצרים..." autocomplete="off">
+    <button class="nav-search-btn" id="nav-search-btn" title="חיפוש">
+      <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><path d="M21 21l-4.35-4.35"></path></svg>
+    </button>
+    <div class="nav-search-results" id="nav-search-results"></div>
+  </div></div><div class="nav-ecommerce-icons nav-icons-right"><button class="nav-search-toggle" id="mobile-search-toggle" title="חיפוש"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><path d="M21 21l-4.35-4.35"></path></svg></button></div>
+    
+    
+  </div>
+</nav>
+
+    <nav class="zappy-catalog-menu rtl" id="zappy-catalog-menu" dir="rtl">
+      <div class="catalog-menu-container">
+        <a href="/products" class="catalog-menu-item catalog-menu-all">כל המוצרים</a>
+        <div class="catalog-menu-categories" id="zappy-category-links">
+          <!-- Categories will be loaded dynamically -->
+        </div>
+      </div>
+    </nav>
+  
+  
+  <main>
+    <section class="properties-banner-section" data-layout-spec="נכסים-banner">
+  <div class="properties-banner-overlay"></div>
+  <img data-placeholder="properties-banner-image-1" data-context="Cinematic nighttime aerial view of Tel Aviv skyline with illuminated modern high-rise buildings, luxury residential towers, and city lights reflecting sophisticated urban real estate investment opportunities" width="1920" height="1080" src="/assets/site-properties-banner-image-1.webp" alt="נוף תל אביב בלילה - נדלן יוקרתי" class="properties-banner-bg">
+  <div class="properties-banner-container">
+    <div class="properties-banner-content">
+      <h1>נכסים נבחרים עם סיכומים ברמת משקיע</h1>
+      <p>כל נכס ברשימה נבחר על בסיס יסודות מיקום חזקים ומנועי ערך ברורים. אנו מספקים תמונה מלאה עם נתונים מדויקים, פוטנציאל שיפוץ, ואפשרויות תשואה.</p>
+      <div class="properties-banner-chips">
+        <div class="properties-banner-chip">
+          <i class="fas fa-map-marked-alt" aria-hidden="true"></i>
+          <span>כיסוי שכונות מגוון</span>
+        </div>
+        <div class="properties-banner-chip">
+          <i class="fas fa-building" aria-hidden="true"></i>
+          <span>סוגי נכסים שונים</span>
+        </div>
+        <div class="properties-banner-chip">
+          <i class="fas fa-chart-line" aria-hidden="true"></i>
+          <span>נתוני מ״ר, שיפוץ, תשואה</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="properties-banner-divider-wrapper">
+    <svg data-no-icon-edit="true" aria-hidden="true" viewBox="0 0 1200 2" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <line x1="0" y1="1" x2="120" y2="1" stroke="var(--border-dark)" stroke-width="1"></line>
+      <line x1="120" y1="1" x2="122" y2="1" stroke="#00C8E8" stroke-width="2"></line>
+      <line x1="122" y1="1" x2="1200" y2="1" stroke="var(--border-dark)" stroke-width="1"></line>
+    </svg>
+  </div>
+</section>
+
+<section class="properties-portfolio-section" data-layout-spec="נכסים-portfolio">
+  <div class="properties-portfolio-container">
+    <div class="properties-portfolio-header">
+      <h2>קטלוג נכסים נבחרים</h2>
+      <p>סרוק לפי יסודות כלכליים ולא לפי הייפ. כל נכס מוצג עם נתונים מדויקים שמאפשרים החלטה מושכלת.</p>
+    </div>
+
+    <div class="properties-portfolio-grid">
+      <!-- Property Card 1 - Premium -->
+      <article class="property-card">
+        <div class="property-media">
+          <span class="premium-badge">פרימיום</span>
+          <div class="media-overlay"></div>
+          <img data-placeholder="properties-portfolio-image-1" data-context="Luxury modern apartment interior in Tel Aviv with floor-to-ceiling windows, minimalist design, high-end finishes, city skyline view at dusk, professional real estate photography" width="600" height="400" src="/assets/site-properties-portfolio-image-1.webp" alt="דירת פנטהאוז יוקרתית בתל אביב">
+        </div>
+        <div class="property-content">
+          <h3>פנטהאוז בשכונת נווה צדק</h3>
+          <p>דירת גג מרהיבה עם גישה ישירה למרפסת גג פרטית בת 80 מ"ר. עיצוב אדריכלי ייחודי, חומרי גלם איכוtiים, ונוף פתוח לים. הבניין עבר שיפוץ מקיף לפני שנתיים.</p>
+          <div class="property-metrics">
+            <span class="metric-item">₪4.8M - ₪5.2M</span>
+            <span class="metric-separator">•</span>
+            <span class="metric-item">185 מ"ר</span>
+            <span class="metric-separator">•</span>
+            <span class="metric-item">תשואה צפויה: 3.8%</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- Property Card 2 -->
+      <article class="property-card">
+        <div class="property-media">
+          <div class="media-overlay"></div>
+          <img data-placeholder="properties-portfolio-image-2" data-context="Modern renovated apartment in Tel Aviv Florentin neighborhood, exposed brick walls, industrial design elements, open space living area, professional real estate photography" width="600" height="400" src="/assets/site-properties-portfolio-image-2.webp" alt="דירה מחודשת בפלורנטין">
+        </div>
+        <div class="property-content">
+          <h3>דירת גן בפלורנטין</h3>
+          <p>דירה בת 3 חדרים עם גינה פרטית בת 40 מ"ר. שופצה לחלוטין לפני שנה עם חומרים איכותיים. אזור מבוקש עם פוטנציאל עליה גבוה. קרוב למרכזי תחבורה ובילוי.</p>
+          <div class="property-metrics">
+            <span class="metric-item">₪2.6M - ₪2.9M</span>
+            <span class="metric-separator">•</span>
+            <span class="metric-item">95 מ"ר</span>
+            <span class="metric-separator">•</span>
+            <span class="metric-item">תשואה צפויה: 4.2%</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- Property Card 3 -->
+      <article class="property-card">
+        <div class="property-media">
+          <div class="media-overlay"></div>
+          <img data-placeholder="properties-portfolio-image-3" data-context="Elegant apartment building facade in Tel Aviv Rothschild Boulevard, classic Bauhaus architecture, renovated exterior, tree-lined street, professional real estate photography" width="600" height="400" src="/assets/site-properties-portfolio-image-3.webp" alt="דירה בשדרות רוטשילד">
+        </div>
+        <div class="property-content">
+          <h3>דירה בשדרות רוטשילד</h3>
+          <p>דירת 4 חדרים בבניין באוהאוס משופץ. תקרות גבוהות, חלונות מקוריים, ופרקט עתיק משוחזר. מיקום מרכזי בלב תל אביב עם גישה מיידית לכל השירותים.</p>
+          <div class="property-metrics">
+            <span class="metric-item">₪3.9M - ₪4.3M</span>
+            <span class="metric-separator">•</span>
+            <span class="metric-item">120 מ"ר</span>
+            <span class="metric-separator">•</span>
+            <span class="metric-item">תשואה צפויה: 3.5%</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- Property Card 4 - Premium -->
+      <article class="property-card">
+        <div class="property-media">
+          <span class="premium-badge">פרימיום</span>
+          <div class="media-overlay"></div>
+          <img data-placeholder="properties-portfolio-image-4" data-context="Luxury modern high-rise apartment interior with panoramic sea view, contemporary design, marble floors, designer kitchen, Tel Aviv coastline visible, professional real estate photography" width="600" height="400" src="/assets/site-properties-portfolio-image-4.webp" alt="דירה עם נוף לים בצפון תל אביב">
+        </div>
+        <div class="property-content">
+          <h3>דירת יוקרה עם נוף לים</h3>
+          <p>דירת 5 חדרים בקומה גבוהה במגדל יוקרה חדש. נוף פנורמי לים, מטבח מעצבים, מערכות חכמות, ושתי חניות בטאבו. מתאים למשקיעים המחפשים נכס פרימיום.</p>
+          <div class="property-metrics">
+            <span class="metric-item">₪6.2M - ₪6.8M</span>
+            <span class="metric-separator">•</span>
+            <span class="metric-item">165 מ"ר</span>
+            <span class="metric-separator">•</span>
+            <span class="metric-item">תשואה צפויה: 3.2%</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- Property Card 5 -->
+      <article class="property-card">
+        <div class="property-media">
+          <div class="media-overlay"></div>
+          <img data-placeholder="properties-portfolio-image-5" data-context="Renovated studio apartment in Tel Aviv, modern minimalist design, efficient space planning, natural light, young professional living space, professional real estate photography" width="600" height="400" src="/assets/site-properties-portfolio-image-5.webp" alt="דירת סטודיו מחודשת">
+        </div>
+        <div class="property-content">
+          <h3>סטודיו מחודש בלב העיר</h3>
+          <p>דירת סטודיו מעוצבת בשכונת לב העיר. שופצה בסטנדרט גבוה עם ניצול חכם של השטח. מושכרת כרגע לשוכר איכותי לטווח ארוך. אידיאלי למשקיע המחפש תשואה מיידית.</p>
+          <div class="property-metrics">
+            <span class="metric-item">₪1.4M - ₪1.6M</span>
+            <span class="metric-separator">•</span>
+            <span class="metric-item">42 מ"ר</span>
+            <span class="metric-separator">•</span>
+            <span class="metric-item">תשואה צפויה: 4.8%</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- Property Card 6 -->
+      <article class="property-card">
+        <div class="property-media">
+          <div class="media-overlay"></div>
+          <img data-placeholder="properties-portfolio-image-6" data-context="Spacious family apartment in Tel Aviv residential neighborhood, bright living room, balcony with green plants, family-friendly interior, professional real estate photography" width="600" height="400" src="/assets/site-properties-portfolio-image-6.webp" alt="דירה משפחתית בצפון תל אביב">
+        </div>
+        <div class="property-content">
+          <h3>דירה משפחתית ברמת אביב</h3>
+          <p>דירת 4.5 חדרים מרווחת בשכונה שקטה ומבוקשה. שתי מרפסות, מחסן, וחניה מקורה. הבניין בתחזוקה מצוינת, קרוב לבתי ספר ופארקים.</p>
+          <div class="property-metrics">
+            <span class="metric-item">₪3.2M - ₪3.5M</span>
+            <span class="metric-separator">•</span>
+            <span class="metric-item">115 מ"ר</span>
+            <span class="metric-separator">•</span>
+            <span class="metric-item">תשואה צפויה: 3.6%</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- Property Card 7 -->
+      <article class="property-card">
+        <div class="property-media">
+          <div class="media-overlay"></div>
+          <img data-placeholder="properties-portfolio-image-7" data-context="Duplex apartment with modern staircase, high ceilings, split-level design, contemporary interior, natural light from skylights, professional real estate photography" width="600" height="400" src="/assets/site-properties-portfolio-image-7.webp" alt="דירת דופלקס בשרונה">
+        </div>
+        <div class="property-content">
+          <h3>דופלקס ייחודי ליד שרונה</h3>
+          <p>דירת דופלקס בת 5 חדרים עם גלריה פנימית. עיצוב מודרני, תקרות גבוהות, וחלונות גדולים המציפים את הדירה באור טבעי. מיקום אטרקטיבי בסמוך למרכז עסקים.</p>
+          <div class="property-metrics">
+            <span class="metric-item">₪4.5M - ₪4.9M</span>
+            <span class="metric-separator">•</span>
+            <span class="metric-item">145 מ"ר</span>
+            <span class="metric-separator">•</span>
+            <span class="metric-item">תשואה צפויה: 3.4%</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- Property Card 8 -->
+      <article class="property-card">
+        <div class="property-media">
+          <div class="media-overlay"></div>
+          <img data-placeholder="properties-portfolio-image-8" data-context="Renovated investment apartment in Tel Aviv, rental-ready condition, modern fixtures, neutral design, efficient layout, professional real estate photography" width="600" height="400" src="/assets/site-properties-portfolio-image-8.webp" alt="דירת השקעה ביפו">
+        </div>
+        <div class="property-content">
+          <h3>דירת השקעה ביפו העתיקה</h3>
+          <p>דירת 2.5 חדרים משופצת באזור התיירותי של יפו. פוטנציאל השכרה גבוה לטווח קצר וארוך. הנכס ממוקם בסמוך לנמל יפו ולשוק הפשפשים.</p>
+          <div class="property-metrics">
+            <span class="metric-item">₪2.1M - ₪2.4M</span>
+            <span class="metric-separator">•</span>
+            <span class="metric-item">75 מ"ר</span>
+            <span class="metric-separator">•</span>
+            <span class="metric-item">תשואה צפויה: 4.5%</span>
+          </div>
+        </div>
+      </article>
+
+      <!-- Property Card 9 -->
+      <article class="property-card">
+        <div class="property-media">
+          <div class="media-overlay"></div>
+          <img data-placeholder="properties-portfolio-image-9" data-context="New construction apartment building in Tel Aviv, modern architecture, balconies with glass railings, urban development project, professional real estate photography" width="600" height="400" src="/assets/site-properties-portfolio-image-9.webp" alt="דירה בפרויקט חדש">
+        </div>
+        <div class="property-content">
+          <h3>דירה בפרויקט תמ"א 38</h3>
+          <p>דירת 3 חדרים בפרויקט חדש לגמרי. מעלית חדשה, חניה, ומחסן. הבניין עבר חיזוק ושדרוג מלא. אפשרות למשקיע לרכוש דירה חדשה במחיר אטרקטיבי באזור מבוקש.</p>
+          <div class="property-metrics">
+            <span class="metric-item">₪2.8M - ₪3.1M</span>
+            <span class="metric-separator">•</span>
+            <span class="metric-item">88 מ"ר</span>
+            <span class="metric-separator">•</span>
+            <span class="metric-item">תשואה צפויה: 4.0%</span>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+
+  <!-- Bottom Divider -->
+  <div class="properties-portfolio-divider-wrapper">
+    <svg data-no-icon-edit="true" aria-hidden="true" viewBox="0 0 1200 100" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <filter id="cyan-glow-portfolio">
+          <feGaussianBlur stdDeviation="3" result="coloredBlur"></feGaussianBlur>
+          <feMerge>
+            <feMergeNode in="coloredBlur"></feMergeNode>
+            <feMergeNode in="SourceGraphic"></feMergeNode>
+          </feMerge>
+        </filter>
+      </defs>
+      <path d="M0,100 L0,70 L400,70 L400,40 L800,40 L800,10 L1200,10 L1200,100 Z" fill="#060812" stroke="rgba(0,200,232,0.35)" stroke-width="1" filter="url(#cyan-glow-portfolio)"></path>
+    </svg>
+  </div>
+</section>
+
+<section class="נכסים-case-studies-section" data-layout-spec="נכסים-case-studies">
+  <div class="case-studies-container">
+    <div class="case-studies-header">
+      <h2>מקרי בוחן מהשטח</h2>
+      <p>שלושה פרויקטים אמיתיים שמדגימים את הגישה המקצועית שלנו בשוק הנדל"ן התל-אביבי</p>
+    </div>
+
+    <!-- Case Study 1: Content START, Image END -->
+    <article class="case-study-block case-study-1">
+      <div class="case-study-content">
+        <h3>דירת גן בצפון תל אביב - מהזנחה לנכס פרימיום</h3>
+        <p>נכס בן 4 חדרים בשכונת רמת אביב ג' שנרכש במצב ירוד. החלטנו להשקיע בשיפוץ מקיף הכולל פתיחת מרחבים, חידוש מערכות ועיצוב עכשווי. הפוטנציאל היה ברור: מיקום מבוקש, גינה פרטית, ופער משמעותי בין מצב הנכס למחיר הממוצע באזור. לאחר 4 חודשי עבודה, הנכס הושכר למשפחה צעירה בתעריף פרימיום.</p>
+        <div class="case-metrics">
+          <div class="metric-item">
+            <div class="metric-label">טווח רכישה</div>
+            <div class="metric-value">₪2.8M–₪3.1M</div>
+          </div>
+          <div class="metric-item">
+            <div class="metric-label">היקף שיפוץ</div>
+            <div class="metric-value">₪380K</div>
+          </div>
+          <div class="metric-item">
+            <div class="metric-label">תשואה צפויה</div>
+            <div class="metric-value">4.8%</div>
+          </div>
+        </div>
+      </div>
+      <div class="case-study-image">
+        <div class="image-overlay"></div>
+        <img data-placeholder="נכסים-case-studies-image-1" data-context="Modern renovated apartment interior in north Tel Aviv, bright living room with open floor plan, contemporary Israeli design, natural light through large windows, minimalist furniture, view of private garden, high-end finishes, clean lines, warm atmosphere" width="600" height="400" src="/assets/site-case-studies-image-1.webp" alt="דירת גן משופצת בצפון תל אביב">
+      </div>
+    </article>
+
+    <!-- Case Study 2: Image START, Content END -->
+    <article class="case-study-block case-study-2">
+      <div class="case-study-image">
+        <div class="image-overlay"></div>
+        <img data-placeholder="נכסים-case-studies-image-2" data-context="Boutique apartment building exterior in central Tel Aviv, Bauhaus-style architecture, white facade with balconies, tree-lined street, urban residential neighborhood, afternoon light, classic Tel Aviv character, renovated historic building" width="600" height="400" src="/assets/site-case-studies-image-2.webp" alt="בניין בוטיק במרכז תל אביב">
+      </div>
+      <div class="case-study-content">
+        <h3>דירת 3 חדרים במרכז העיר - השקעה לטווח ארוך</h3>
+        <p>נכס בבניין בוטיק משנות ה-50 ברחוב שקט במרכז העיר. הדירה נרכשה ממשקיע זר שרצה לצאת מהשוק, והיוותה הזדמנות נדירה בשל המיקום והפוטנציאל. ביצענו שיפוץ קוסמטי ממוקד - עדכון מטבח, חידוש אמבטיה, ושדרוג מערכות חשמל. האסטרטגיה: להשכיר לדיירים איכותיים ולהחזיק לטווח ארוך, תוך ניצול עליית הערך בשכונה.</p>
+        <div class="case-metrics">
+          <div class="metric-item">
+            <div class="metric-label">טווח רכישה</div>
+            <div class="metric-value">₪2.2M–₪2.5M</div>
+          </div>
+          <div class="metric-item">
+            <div class="metric-label">היקף שיפוץ</div>
+            <div class="metric-value">₪180K</div>
+          </div>
+          <div class="metric-item">
+            <div class="metric-label">תשואה צפויה</div>
+            <div class="metric-value">4.2%</div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- Case Study 3: Content START, Image END -->
+    <article class="case-study-block case-study-3">
+      <div class="case-study-content">
+        <h3>דירת פנטהאוז בדרום תל אביב - מהימור מחושב</h3>
+        <p>נכס ייחודי בקומה עליונה בשכונה מתפתחת בדרום העיר. המיקום היה פחות מבוסס, אך האינדיקציות היו חיוביות: פרויקטי התחדשות עירונית באזור, קרבה לים, ומחירים נמוכים יחסית. השקענו בשיפוץ יוקרתי הכולל פתיחת גג, הוספת מרפסת שמש ועיצוב מודרני. הנכס הושכר לזוג צעיר מקצועי שחיפש חלופה לצפון העיר, והתשואה עלתה על הציפיות.</p>
+        <div class="case-metrics">
+          <div class="metric-item">
+            <div class="metric-label">טווח רכישה</div>
+            <div class="metric-value">₪1.9M–₪2.1M</div>
+          </div>
+          <div class="metric-item">
+            <div class="metric-label">היקף שיפוץ</div>
+            <div class="metric-value">₪420K</div>
+          </div>
+          <div class="metric-item">
+            <div class="metric-label">תשואה צפויה</div>
+            <div class="metric-value">5.3%</div>
+          </div>
+        </div>
+      </div>
+      <div class="case-study-image">
+        <div class="image-overlay"></div>
+        <img data-placeholder="נכסים-case-studies-image-3" data-context="Luxury penthouse rooftop terrace in south Tel Aviv, modern outdoor furniture, city skyline view, sunset lighting, contemporary design, glass railings, wooden deck, urban oasis, Mediterranean atmosphere, premium real estate" width="600" height="400" src="/assets/site-case-studies-image-3.webp" alt="פנטהאוז עם גג בדרום תל אביב">
+      </div>
+    </article>
+  </div>
+
+  <!-- Bottom Divider: Glowing dotted line -->
+  <div class="case-studies-divider-wrapper">
+    <svg data-no-icon-edit="true" aria-hidden="true" viewBox="0 0 1200 60" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="divider-glow-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+          <stop offset="0%" style="stop-color:rgba(0,200,232,0.6);stop-opacity:1"></stop>
+          <stop offset="50%" style="stop-color:rgba(0,200,232,0.3);stop-opacity:1"></stop>
+          <stop offset="100%" style="stop-color:rgba(0,200,232,0.05);stop-opacity:1"></stop>
+        </linearGradient>
+      </defs>
+      <!-- Solid line on START side transitioning to dots on END side -->
+      <line x1="0" y1="30" x2="600" y2="30" stroke="url(#divider-glow-gradient)" stroke-width="2"></line>
+      <circle cx="650" cy="30" r="3" fill="rgba(0,200,232,0.4)"></circle>
+      <circle cx="700" cy="30" r="3" fill="rgba(0,200,232,0.35)"></circle>
+      <circle cx="750" cy="30" r="3" fill="rgba(0,200,232,0.3)"></circle>
+      <circle cx="800" cy="30" r="3" fill="rgba(0,200,232,0.25)"></circle>
+      <circle cx="850" cy="30" r="3" fill="rgba(0,200,232,0.2)"></circle>
+      <circle cx="900" cy="30" r="3" fill="rgba(0,200,232,0.15)"></circle>
+      <circle cx="950" cy="30" r="3" fill="rgba(0,200,232,0.1)"></circle>
+      <circle cx="1000" cy="30" r="3" fill="rgba(0,200,232,0.08)"></circle>
+      <circle cx="1050" cy="30" r="3" fill="rgba(0,200,232,0.05)"></circle>
+      <circle cx="1100" cy="30" r="3" fill="rgba(0,200,232,0.03)"></circle>
+      <!-- Fill bottom area to merge with next section -->
+      <rect x="0" y="30" width="1200" height="30" fill="var(--bg-dark)"></rect>
+    </svg>
+  </div>
+</section>
+
+<section class="-locations-section" data-layout-spec="נכסים-locations">
+  <div class="-locations-container">
+    <div class="-locations-header">
+      <h2>מודיעין שכונתי, מסוכם בבהירות</h2>
+      <p>אנחנו בוחנים מנועי ביקוש ברמת הרחוב, משווים נתוני מחירים לאורך זמן ומזהים וריאציות מיקרו שמשפיעות על תשואה. כל שכונה מקבלת ניתוח עצמאי המשקלל נגישות, תמהיל דיירים ופוטנציאל עתידי.</p>
+    </div>
+
+    <div class="-locations-content-wrapper">
+      <div class="-locations-neighborhoods">
+        <div class="-locations-neighborhood-item">
+          <h3>נווה צדק</h3>
+          <p>קהל יעד: זוגות צעירים ומשקיעים זרים. אזור בוטיק עם דירות קטנות-בינוניות, מסעדות יוקרה וגישה מהירה לים. רגישות מחיר גבוהה – כל 50 מ״ר נוספים משפיעים באופן משמעותי על השווי.</p>
+        </div>
+
+        <div class="-locations-neighborhood-item">
+          <h3>פלורנטין</h3>
+          <p>קהל יעד: דיירים צעירים, אמנים ויזמי סטארט-אפ. שוק שכירות דינמי עם ביקוש גבוה לדירות סטודיו ושני חדרים. מחירים נמוכים יחסית אך עם פוטנציאל עליה חזק בשנים הקרובות.</p>
+        </div>
+
+        <div class="-locations-neighborhood-item">
+          <h3>רמת אביב</h3>
+          <p>קהל יעד: משפחות מבוססות ומשקיעים לטווח ארוך. נכסים גדולים יותר, פארקים, בתי ספר מובילים. ביקוש יציב עם תנודתיות נמוכה – אידיאלי למי שמחפש השקעה שמרנית עם תשואה צפויה.</p>
+        </div>
+
+        <div class="-locations-neighborhood-item">
+          <h3>תל אביב צפון</h3>
+          <p>קהל יעד: יזמים, עצמאיים ומשפחות צעירות. תשתיות מתפתחות, קרבה למרכזי תעסוקה וקניונים. מחירים תחרותיים עם פוטנציאל גידול משמעותי ככל שהאזור ממשיך להתפתח.</p>
+        </div>
+      </div>
+
+      <div class="-locations-map-wrapper">
+        <img data-placeholder="-locations-image-1" data-context="Stylized dark-themed city map of Tel Aviv neighborhoods with subtle street grid, key landmarks marked with minimal icons, dark navy/charcoal background with cyan and magenta accent highlights on specific districts (Neve Tzedek, Florentin, Ramat Aviv, North Tel Aviv), professional cartographic aesthetic with clean typography for neighborhood names in Hebrew, modern minimalist design suitable for real estate intelligence presentation" width="600" height="700" src="/assets/site-locations-image-1.webp" alt="מפת שכונות תל אביב עם אזורי מיקוד">
+        <div class="-locations-map-overlay"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="-locations-divider-wrapper">
+    <svg data-no-icon-edit="true" aria-hidden="true" viewBox="0 0 1200 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <linearGradient id="locations-divider-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" style="stop-color:#060812;stop-opacity:1"></stop>
+          <stop offset="100%" style="stop-color:#050711;stop-opacity:1"></stop>
+        </linearGradient>
+      </defs>
+      <path d="M0,120 L0,40 Q100,38 200,42 T400,38 Q500,42 600,38 T800,42 Q900,38 1000,42 T1200,40 L1200,120 Z" fill="url(#locations-divider-gradient)"></path>
+      <path d="M0,120 L0,40 Q100,38 200,42 T400,38 Q500,42 600,38 T800,42 Q900,38 1000,42 T1200,40 L1200,120 Z" fill="none" stroke="#00C8E8" stroke-width="0.5" opacity="0.3"></path>
+    </svg>
+  </div>
+</section>
+
+<section class="properties-cta-section" data-layout-spec="נכסים-cta">
+  <div class="properties-cta-container">
+    <div class="properties-cta-content">
+      <h2 class="properties-cta-heading">רוצים רשימה מותאמת למטרות שלכם?</h2>
+      <p class="properties-cta-text">שתפו אותנו בטווח התקציב והלוח הזמנים שלכם, ונעביר לכם מבחר נכסים מותאם אישית שמתאים בדיוק לצרכים שלכם.</p>
+      <div class="properties-cta-buttons">
+        <a href="/contact" class="properties-cta-btn properties-cta-btn-primary">צור קשר</a>
+        <a href="/about" class="properties-cta-btn properties-cta-btn-secondary">גלו את הגישה שלנו</a>
+      </div>
+    </div>
+  </div>
+</section>
+  </main>
+  
+  <footer class="site-footer"><div class="footer-container"><div class="footer-content"><div class="footer-section footer-about"><img class="logo" data-placeholder="logo" data-context="business logo" width="150" height="40" src="/assets/business-logo.webp" alt="אריה נכסים - תל אביב"><p class="footer-description">מובילים בתחום הנדל"ן בתל אביב. מציעים מגוון רחב של נכסים איכוtiים למכירה ולהשכרה.</p></div><div class="footer-section footer-links"><h3>קישורים מהירים</h3><ul><li><a href="/properties">נכסים</a></li><li><a href="/about">אודות</a></li><li><a href="/contact">צור קשר</a></li></ul></div><div class="footer-section footer-contact"><h3>צור קשר</h3><ul class="contact-list"><li><i class="fas fa-envelope"></i><a href="mailto:[business_email]">[business_email]</a></li><li><i class="fas fa-phone"></i><a href="tel:[business_phone]">[business_phone]</a></li><li><a href="/"><i class="fas fa-map-marker-alt"></i><span>[business_address]</span></a></li></ul></div><div class="footer-section footer-social"><h3>עקבו אחרינו</h3><div class="social-links"><a href="[facebook_handle]" aria-label="Facebook" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook-f"></i></a><a href="[instagram_handle]" aria-label="Instagram" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a><a href="[whatsapp_handle]" aria-label="WhatsApp" target="_blank" rel="noopener noreferrer"><i class="fab fa-whatsapp"></i></a></div></div></div><div class="footer-bottom"><div class="footer-legal"><a href="/privacy">Privacy Policy</a><span class="separator">|</span><a href="/terms">Terms &amp; Conditions</a><span class="separator">|</span>
+            <a href="/return-policy" aria-label="מדיניות החזרות">
+              מדיניות החזרות
+            </a><span class="separator">|</span><a href="/accessibility">Accessibility</a></div><div class="footer-copyright"><p>© 2026 אריה נכסים - תל אביב. All rights reserved.</p></div><div class="footer-attribution"><a href="https://zappy5.com" target="_blank" class="zappy-attribution">Generated by Zappy</a></div></div></div></footer>
+  
+  <a href="https://wa.me/[whatsapp_handle]" class="whatsapp-float" aria-label="WhatsApp">
+    <i class="fab fa-whatsapp"></i>
+  </a>
+  
+  <script src="/script.js"></script>
+
+    <div data-integration="accessibility:toolbar"></div>
+
+    <script id="zappy-mobile-submenu-script">
+    (function() {
+      function initMobileSubmenuToggles() {
+        if (window.innerWidth > 768) {
+          document.querySelectorAll('.mobile-submenu-toggle').forEach(function(btn) { btn.remove(); });
+          document.querySelectorAll('.sub-menu.mobile-expanded').forEach(function(menu) { menu.classList.remove('mobile-expanded'); });
+          return;
+        }
+        var items = document.querySelectorAll('.nav-menu li:has(.sub-menu), nav li:has(.sub-menu), .navbar li:has(.sub-menu), #navMenu li:has(.sub-menu)');
+        items.forEach(function(li) {
+          if (li.querySelector('.mobile-submenu-toggle')) return;
+          var submenu = li.querySelector('.sub-menu');
+          var parentLink = li.querySelector(':scope > a');
+          if (!submenu || !parentLink) return;
+          var toggleBtn = document.createElement('button');
+          toggleBtn.className = 'mobile-submenu-toggle';
+          toggleBtn.setAttribute('aria-label', 'Toggle submenu');
+          toggleBtn.setAttribute('type', 'button');
+          parentLink.insertAdjacentElement('afterend', toggleBtn);
+          toggleBtn.addEventListener('click', function(e) {
+            e.preventDefault(); e.stopPropagation();
+            document.querySelectorAll('.sub-menu.mobile-expanded').forEach(function(menu) {
+              if (menu !== submenu) { menu.classList.remove('mobile-expanded'); var t = menu.parentElement.querySelector('.mobile-submenu-toggle'); if(t) t.classList.remove('expanded'); }
+            });
+            submenu.classList.toggle('mobile-expanded');
+            toggleBtn.classList.toggle('expanded');
+          });
+        });
+      }
+      if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', initMobileSubmenuToggles); }
+      else { initMobileSubmenuToggles(); }
+      var resizeTimer; window.addEventListener('resize', function() { clearTimeout(resizeTimer); resizeTimer = setTimeout(initMobileSubmenuToggles, 250); });
+      // Re-initialize when mobile menu becomes visible (MutationObserver)
+      var observer = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+          if (mutation.type === 'attributes') {
+            var target = mutation.target;
+            if (target.classList && (target.classList.contains('active') || target.classList.contains('open'))) {
+              setTimeout(initMobileSubmenuToggles, 100);
+            }
+          }
+        });
+      });
+      setTimeout(function() {
+        document.querySelectorAll('.mobile-menu, .nav-menu, #navMenu, nav').forEach(function(menu) {
+          observer.observe(menu, { attributes: true, attributeFilter: ['class', 'style'] });
+        });
+      }, 500);
+    })();
+    </script>
+</body></html>
